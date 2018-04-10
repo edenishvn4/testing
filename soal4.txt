@@ -1,0 +1,51 @@
+const express= require('express');
+const app = express();
+
+var mongo = require('mongodb').MongoClient;
+var url ='mongodb://andi:anditopsecret@localhost:27017/kampus';
+
+app.get('/dosen',(req,res)=>{
+    mongo.connect(url,(err,db)=>{
+        var coll = db.collection('Dosen');
+        coll.find({}).toArray((err,docs)=>{
+            console.log(docs)
+            res.send(docs);
+            db.close();
+        });
+    });
+})
+
+app.get('/mahasiswa',(req,res)=>{
+    mongo.connect(url,(err,db)=>{
+        var coll = db.collection('Mahasiswa');
+        coll.find({}).toArray((err,docs)=>{
+            console.log(docs)
+            res.send(docs);
+            db.close();
+        });
+    });
+})
+
+app.get('/mnama/:namamahasiswa',(req,res)=>{
+    mongo.connect(url,(err,db)=>{
+        var coll = db.collection('Mahasiswa');
+        coll.find({nama:req.params.namamahasiswa}).toArray((err,docs)=>{
+            res.send(docs);
+            db.close();
+        });
+    });
+})
+
+app.get('/dnama/:namadosen',(req,res)=>{
+    mongo.connect(url,(err,db)=>{
+        var coll = db.collection('Dosen');
+        coll.find({nama:req.params.namadosen}).toArray((err,docs)=>{
+            res.send(docs);
+            db.close();
+        });
+    });
+})
+
+app.listen(3412,()=>{
+    console.log("listening to @port 3412....")
+})

@@ -1,0 +1,192 @@
+CREATE DATABASE  IF NOT EXISTS `resto` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `resto`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: resto
+-- ------------------------------------------------------
+-- Server version	5.7.21-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `bahan_stock`
+--
+
+DROP TABLE IF EXISTS `bahan_stock`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bahan_stock` (
+  `idbahan` int(11) NOT NULL,
+  `nama_bahan` varchar(45) DEFAULT NULL,
+  `nama_vendor` varchar(45) DEFAULT NULL,
+  `jml_barang` int(11) DEFAULT NULL,
+  `nama_satuan` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idbahan`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bahan_stock`
+--
+
+LOCK TABLES `bahan_stock` WRITE;
+/*!40000 ALTER TABLE `bahan_stock` DISABLE KEYS */;
+INSERT INTO `bahan_stock` VALUES (21001,'bawang bombay','PT Bawang Nikmat',6,'buah'),(21002,'bawang putih','PT Bawang Nikmat',20,'buah'),(21003,'bawang merah','PT Bawang Nikmat',20,'buah');
+/*!40000 ALTER TABLE `bahan_stock` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bahan_trx`
+--
+
+DROP TABLE IF EXISTS `bahan_trx`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bahan_trx` (
+  `idbahan` int(11) NOT NULL,
+  `nama_bahan` varchar(100) DEFAULT NULL,
+  `idkaryawan` int(11) DEFAULT NULL,
+  `time_in_out` varchar(60) DEFAULT NULL,
+  `jml_barang` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idbahan`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bahan_trx`
+--
+
+LOCK TABLES `bahan_trx` WRITE;
+/*!40000 ALTER TABLE `bahan_trx` DISABLE KEYS */;
+INSERT INTO `bahan_trx` VALUES (21001,'bawang bombay',11011,'2018-04-10',4),(21002,'bawang putih',11012,'2018-04-10',10),(21003,'bawang merah',11012,'2018-04-10',10);
+/*!40000 ALTER TABLE `bahan_trx` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `food_beverage`
+--
+
+DROP TABLE IF EXISTS `food_beverage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `food_beverage` (
+  `id_fb` int(11) NOT NULL,
+  `nama_fb` varchar(150) DEFAULT NULL,
+  `tipe_fb` varchar(60) DEFAULT NULL,
+  `harga` int(11) DEFAULT NULL,
+  `idresto` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_fb`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `food_beverage`
+--
+
+LOCK TABLES `food_beverage` WRITE;
+/*!40000 ALTER TABLE `food_beverage` DISABLE KEYS */;
+INSERT INTO `food_beverage` VALUES (31001,'nasi goreng','main course',15000,41001),(31002,'jus melon','juice',15000,41001),(31003,'chicken wings','appetizer',15000,41002);
+/*!40000 ALTER TABLE `food_beverage` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `karyawan`
+--
+
+DROP TABLE IF EXISTS `karyawan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `karyawan` (
+  `idkaryawan` int(11) NOT NULL,
+  `nama` varchar(45) DEFAULT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `role` varchar(45) DEFAULT NULL,
+  `gaji` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idkaryawan`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `karyawan`
+--
+
+LOCK TABLES `karyawan` WRITE;
+/*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
+INSERT INTO `karyawan` VALUES (11001,'andi','laki-laki','kasir',3500000),(11002,'budi','laki-laki','chef',4500000),(11003,'miona','perempuan','pelayan',4000000),(11004,'caca','perempuan','pelayan',4500000);
+/*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resto_cabang`
+--
+
+DROP TABLE IF EXISTS `resto_cabang`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resto_cabang` (
+  `idresto` int(11) NOT NULL,
+  `nama_resto` varchar(100) DEFAULT NULL,
+  `alamat` varchar(60) DEFAULT NULL,
+  `kota` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`idresto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resto_cabang`
+--
+
+LOCK TABLES `resto_cabang` WRITE;
+/*!40000 ALTER TABLE `resto_cabang` DISABLE KEYS */;
+INSERT INTO `resto_cabang` VALUES (41001,'makanan seadanya','jl makanan no 12','jakarta'),(41002,'makanan mewah','jl minuman no 12','tangerang'),(41003,'makanan selamanya','jl roti no 12','bandung');
+/*!40000 ALTER TABLE `resto_cabang` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `trpenjualan`
+--
+
+DROP TABLE IF EXISTS `trpenjualan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trpenjualan` (
+  `kode_invoice` int(11) NOT NULL,
+  `idresto` int(11) DEFAULT NULL,
+  `idkaryawan` int(11) DEFAULT NULL,
+  `trx_time` datetime DEFAULT NULL,
+  `kode_makanan` varchar(45) DEFAULT NULL,
+  `kode_minuman` varchar(45) DEFAULT NULL,
+  `Jumlah` varchar(45) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
+  PRIMARY KEY (`kode_invoice`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `trpenjualan`
+--
+
+LOCK TABLES `trpenjualan` WRITE;
+/*!40000 ALTER TABLE `trpenjualan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trpenjualan` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-04-10 14:04:12

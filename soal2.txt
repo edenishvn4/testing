@@ -1,0 +1,165 @@
+const express = require('express');
+const app = express();
+const mysql = require('mysql');
+
+const db = mysql.createConnection({
+    host:'localhost',
+    user: 'irsdb',
+    password:'Irshakun29',
+    database: 'resto'
+})
+
+db.connect();
+
+//untuk stok
+
+app.patch('/dstok',(req,res)=>{
+    var nama="21001"
+    var sql = 'UPDATE bahan_stock SET jml_barang=jml_barang-2 WHERE idbahan=?;';
+    db.query(sql,nama,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    });
+});
+
+app.delete('/dstok',(req,res)=>{
+    var nama="21002"
+    var sql = 'DELETE from bahan_stock WHERE id=?';
+    db.query(sql,nama,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+//untuk stok -end-
+
+
+//untuk karyawan
+app.post('/dkarya',(req,res)=>{
+    var data={idkaryawan:11004,nama:"caca",gender:"perempuan",role:"pelayan",gaji:4500000}
+    var sql = 'INSERT INTO karyawan SET ?';
+    db.query(sql,data,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+
+app.get('/dkarya',(req,res)=>{
+    var sql = 'SELECT * FROM karyawan';
+    db.query(sql,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+
+app.patch('/dkarya',(req,res)=>{
+    var nama="caca"
+    var sql = 'UPDATE karyawan SET nama="miona" WHERE nama=?';
+    db.query(sql,nama,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+
+app.delete('/dkarya',(req,res)=>{
+    var nama="caca"
+    var sql = 'DELETE from karyawan WHERE nama=?';
+    db.query(sql,nama,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+//untuk karyawan -end-
+
+
+//untuk makanan
+app.post('/dmkn',(req,res)=>{
+    var data={id_fb:31003,nama_fb:"chicken wings",tipe_fb:"appetizer",harga:15000,idresto:41002}
+    var sql = 'INSERT INTO food_beverage SET ?';
+    db.query(sql,data,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+
+app.get('/dmkn',(req,res)=>{
+    var sql = 'SELECT * FROM food_beverage';
+    db.query(sql,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+
+app.patch('/dmkn',(req,res)=>{
+    var nama="31002"
+    var sql = 'UPDATE food_beverage SET id_resto="41001" WHERE id_fb=?';
+    db.query(sql,nama,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+
+app.delete('/dmkn',(req,res)=>{
+    var nama="31003"
+    var sql = 'DELETE from food_beverage WHERE id_fb=?';
+    db.query(sql,nama,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+//untuk makanan -end-
+
+
+//untuk resto
+app.post('/dresto',(req,res)=>{
+    var data={idresto:41003,nama_resto:"makanan selamanya",alamat:"jl roti no 12",kota:"bandung"}
+    var sql = 'INSERT INTO resto_cabang SET ?';
+    db.query(sql,data,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+
+app.get('/dresto',(req,res)=>{
+    var sql = 'SELECT * FROM resto_cabang';
+    db.query(sql,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+
+app.patch('/dresto',(req,res)=>{
+    var nama="41002"
+    var sql = 'UPDATE resto_cabang SET nama_resto="makanan mewah" WHERE idresto=?';
+    db.query(sql,nama,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+
+app.delete('/dresto',(req,res)=>{
+    var nama="41003"
+    var sql = 'DELETE from resto_cabang WHERE idresto=?';
+    db.query(sql,nama,(err,res1)=>{
+        if(err) throw err;
+        console.log(res);
+        res.send(res1);
+    }); 
+});
+//untuk resto -end-
+
+app.listen(3023,'0.0.0.0',()=>{
+    console.log('listening to @port 3023...')
+})
